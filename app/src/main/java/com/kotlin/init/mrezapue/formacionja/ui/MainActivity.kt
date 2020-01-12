@@ -1,10 +1,11 @@
-package com.kotlin.init.mrezapue.formacionja
+package com.kotlin.init.mrezapue.formacionja.ui
 
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import com.kotlin.init.mrezapue.formacionja.R
 
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -36,4 +37,5 @@ class MainActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
+
 }
