@@ -5,7 +5,7 @@ import kotlinx.android.parcel.Parcelize
 
 data class MovieResponse(
     val page: Int,
-    val results: Map<String,Movie>,
+    val results: List<Movie>,
     val total_pages: Int,
     val total_results: Int
 )
