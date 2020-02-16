@@ -1,0 +1,30 @@
+ext {
+    androidVersion = "1.1.0"
+    androidConstraintVersion = "1.1.3"
+    androidRecyclerView = "1.1.0"
+    androidLifeCycleVersion = "2.2.0"
+
+    androidLib = [
+            appCompat         : "androidx.appcompat:appcompat:$androidVersion",
+            core              : "androidx.core:core-ktx:$androidVersion",
+            constraint        : "androidx.constraintlayout:constraintlayout:$androidConstraintVersion",
+            recyclerview      : "androidx.recyclerview:recyclerview:$androidRecyclerView",
+            lifeCycleLiveData : "androidx.lifecycle:lifecycle-livedata-ktx:$androidLifeCycleVersion",
+            lifeCycleViewModel: "androidx.lifecycle:lifecycle-viewmodel-ktx:$androidLifeCycleVersion",
+            lifeCycleRuntime  : "androidx.lifecycle:lifecycle-runtime-ktx:$androidLifeCycleVersion",
+    ]
+
+    androidTestUnitVersion = "1.1.1"
+    androidTestEspressoVersion = "3.2.0"
+
+    androidTest = [
+            unit    : "androidx.test.ext:junit:$androidTestUnitVersion",
+            espresso: "androidx.test.espresso:espresso-core:$androidTestEspressoVersion"
+    ]
+
+    testUnitVersion = "4.13"
+
+    test = [
+            unit: "junit:junit:$testUnitVersion"
+    ]
+}
