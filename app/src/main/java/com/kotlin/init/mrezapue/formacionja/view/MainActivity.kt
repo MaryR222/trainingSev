@@ -20,22 +20,16 @@ class MainActivity : AppCompatActivity() {
 
         rvElements?.adapter = MainAdapter()
 
-        viewModel.stateTitle.observe(this, Observer {
+        viewModel.stateTitle.observeForever {
             it?.let { title ->
                 tvTitle?.text = title
             }
-        })
+        }
 
         viewModel.stateList.observe(this, Observer {
-            it?.let { elements ->
-                (rvElements?.adapter as? MainAdapter?)?.submitList(elements)
+            it?.let { pagedList ->
+                (rvElements?.adapter as? MainAdapter?)?.submitList(pagedList)
             }
         })
-
-        viewModel.getElements()
-
-        bAddElement?.setOnClickListener {
-            viewModel.addElement()
-        }
     }
 }

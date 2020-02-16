@@ -1,22 +1,7 @@
 package com.kotlin.init.mrezapue.formacionja.data
-
+import androidx.paging.DataSource
 import com.kotlin.init.mrezapue.formacionja.model.Element
 
-
-class ElementRepository {
-    fun getElements(): List<Element> {
-        return (0 until 50).map {
-            Element(name = "Element $it")
-        }
-    }
-
-    fun addElement(): List<Element> {
-        return (0 until 50).map {
-            if (it in 6..9) {
-                Element(name = "Hi $it")
-            } else {
-                Element(name = "Element $it")
-            }
-        }
-    }
+class ElementRepository(private val dataSourceFactory: DataSource.Factory<Int, Element>) {
+    fun getElements() : DataSource.Factory<Int, Element> = dataSourceFactory
 }

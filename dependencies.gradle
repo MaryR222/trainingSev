@@ -1,14 +1,16 @@
 ext {
     androidVersion = "1.1.0"
     androidConstraintVersion = "1.1.3"
-    androidRecyclerView = "1.1.0"
+    androidRecyclerViewVersion = "1.1.0"
+    androidPagingVersion = "2.1.1"
     androidLifeCycleVersion = "2.2.0"
 
     androidLib = [
             appCompat         : "androidx.appcompat:appcompat:$androidVersion",
             core              : "androidx.core:core-ktx:$androidVersion",
             constraint        : "androidx.constraintlayout:constraintlayout:$androidConstraintVersion",
-            recyclerview      : "androidx.recyclerview:recyclerview:$androidRecyclerView",
+            recyclerview      : "androidx.recyclerview:recyclerview:$androidRecyclerViewVersion",
+            paging            : "androidx.paging:paging-runtime:$androidPagingVersion",
             lifeCycleLiveData : "androidx.lifecycle:lifecycle-livedata-ktx:$androidLifeCycleVersion",
             lifeCycleViewModel: "androidx.lifecycle:lifecycle-viewmodel-ktx:$androidLifeCycleVersion",
             lifeCycleRuntime  : "androidx.lifecycle:lifecycle-runtime-ktx:$androidLifeCycleVersion",

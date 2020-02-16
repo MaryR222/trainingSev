@@ -2,6 +2,7 @@ package com.kotlin.init.mrezapue.formacionja.view
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -10,8 +11,7 @@ import com.kotlin.init.mrezapue.formacionja.model.Element
 
 import kotlinx.android.synthetic.main.activity_main_item.view.*
 
-class MainAdapter : ListAdapter<Element, MainAdapter.MainVH>(ListElementsCallback()) {
-
+class MainAdapter : PagedListAdapter<Element, MainAdapter.MainVH>(ListElementsCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainVH =
         MainVH(
             itemView = LayoutInflater.from(parent.context).inflate(
@@ -22,13 +22,16 @@ class MainAdapter : ListAdapter<Element, MainAdapter.MainVH>(ListElementsCallbac
         )
 
     override fun onBindViewHolder(holder: MainVH, position: Int) {
-        holder.bind(element = getItem(position))
+        getItem(position)?.let { element ->
+            holder.bind(element = element)
+        }
     }
 
     inner class MainVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(element: Element) {
             itemView.tvItem?.text = element.name
         }
+
     }
 
     class ListElementsCallback : DiffUtil.ItemCallback<Element>() {
@@ -40,5 +43,4 @@ class MainAdapter : ListAdapter<Element, MainAdapter.MainVH>(ListElementsCallbac
             return oldItem.name == newItem.name
         }
     }
-
 }

@@ -1,33 +1,31 @@
 package com.kotlin.init.mrezapue.formacionja.view
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+
 import androidx.lifecycle.liveData
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
+import com.kotlin.init.mrezapue.formacionja.data.ElementDataSourceFactory
 import com.kotlin.init.mrezapue.formacionja.data.ElementRepository
-import com.kotlin.init.mrezapue.formacionja.domain.AddElement
+import com.kotlin.init.mrezapue.formacionja.data.FakeElementDataSource
 import com.kotlin.init.mrezapue.formacionja.domain.GetElement
 import com.kotlin.init.mrezapue.formacionja.model.Element
 
 
 class MainViewModel : ViewModel() {
-    private val repository = ElementRepository()
-    private val getElement = GetElement(repository = repository)
-    private val addElement = AddElement(repository = repository)
+    private val dataSource = FakeElementDataSource()
+    private val dataSourceFactory = ElementDataSourceFactory(dataSource = dataSource)
+    private val repository = ElementRepository(dataSourceFactory = dataSourceFactory)
+    private val getElements = GetElement(repository = repository)
 
-    val stateTitle = liveData {
-        emit("Elements")
+    val stateTitle: LiveData<String> = liveData {
+        emit("ELEMENTS")
     }
 
-    private val _stateList: MutableLiveData<List<Element>> = MutableLiveData()
-    val stateList: LiveData<List<Element>>
-        get() = _stateList
+    val stateList: LiveData<PagedList<Element>>
 
-    fun getElements() {
-        _stateList.value = getElement()
-    }
-
-    fun addElement() {
-        _stateList.value = addElement.invoke()
+    init {
+        stateList = LivePagedListBuilder(getElements(), 20).build()
     }
 }
