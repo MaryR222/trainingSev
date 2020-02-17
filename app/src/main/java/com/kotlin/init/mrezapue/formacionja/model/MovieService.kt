@@ -10,7 +10,7 @@ interface MovieService {
 
     @GET("discover/movie?sort_by=popularity.desc")
     suspend fun getlistPopularMoviesAsync(
-        @Query("api_key") apiKey: String,
+        @Query("api_key") apiKey: String?,
         @Query("region") region: String
     ): Response<MovieResponse>
 }
