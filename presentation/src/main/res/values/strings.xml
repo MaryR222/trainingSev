@@ -11,6 +11,7 @@
     <!--Error Login-->
 
     <string name="login_error_user_incorrect">Usuario incorrecto</string>
+    <string name="validation_error">Error de validación</string>
 
 
 </resources>

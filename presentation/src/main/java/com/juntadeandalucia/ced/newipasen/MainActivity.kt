@@ -8,38 +8,14 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import com.juntadeandalucia.ced.newipasen.base.BackPressedListener
 import com.juntadeandalucia.ced.newipasen.base.BaseActivity
+import com.juntadeandalucia.ced.newipasen.login.LoginFragment
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.main_activity)
-
+        supportFragmentManager.beginTransaction().add(R.id.main_content, LoginFragment()).commit()
     }
 
-
-    override fun onBackPressed() {
-        val fragment: BackPressedListener? = getCurrentBackPressedListenerFragment()
-        if (fragment == null) {
-            super.onBackPressed()
-        } else {
-            fragment.onBackPressed()
-        }
-    }
-
-
-    private fun getCurrentBackPressedListenerFragment(): BackPressedListener? {
-        val fragment: Fragment? =
-            supportFragmentManager.findFragmentById(R.id.main_nav_host_fragment)
-        if (fragment != null && fragment is NavHostFragment) {
-            for (childFragment in fragment.childFragmentManager.fragments) {
-                if (childFragment is BackPressedListener) {
-                    return childFragment
-                }
-            }
-        }
-
-        return null
-    }
 }
