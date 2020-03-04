@@ -29,18 +29,47 @@ class LoginFragment : BaseFragment<LoginViewState, LoginViewTransition>() {
             is LoginViewTransition.ValidationUserError -> {
                 textInputUser?.error = getString(R.string.validation_error)
             }
-            is LoginViewTransition.ValidationUserCorrect -> {
+            is LoginViewTransition.ValidationUserSuccess -> {
                 textInputUser?.error = null
             }
             is LoginViewTransition.ValidationPasswordError -> {
-                Toast.makeText(context, getString(R.string.validation_error), Toast.LENGTH_SHORT).show()
+                textInputPassword?.error = getString(R.string.validation_error)
+            }
+            is LoginViewTransition.ValidationUPasswordSuccess -> {
+                textInputPassword.error = null
+            }
+            is LoginViewTransition.ErrorNoInternet -> {
+                showToast(getString(R.string.error_no_internet))
+            }
+            is LoginViewTransition.ErrorServer -> {
+                showToast(getString(R.string.error_server))
+            }
+            is LoginViewTransition.ErrorUnauthorized -> {
+                showToast(getString(R.string.error_unauthorized))
+            }
+            is LoginViewTransition.ErrorUnknown -> {
+                showToast(getString(R.string.error_unknown))
+            }
+            is LoginViewTransition.ErrorUserBloqued -> {
+                showToast(getString(R.string.error_user_blocked))
+            }
+            is LoginViewTransition.ErrorUserInvalid -> {
+                showToast(getString(R.string.error_invalid_user))
+            }
+            is LoginViewTransition.LoginSuccess -> {
+                showToast(getString(R.string.success_login))
             }
         }
 
     }
 
+    private fun showToast(message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+    }
+
     override fun initListeners() {
         etUsername?.addTextChangedListener { viewModel.validateUser(it.toString()) }
         etPassword?.addTextChangedListener { viewModel.validatePassword(it.toString()) }
+        btnLogin?.setOnClickListener { viewModel.login(etUsername.text.toString(), etPassword.text.toString()) }
     }
 }

@@ -9,7 +9,7 @@ class PresentationKoinConfiguration {
 
     fun getModule() = module{
 
-        viewModel { LoginViewModel(get()) }
+        viewModel { LoginViewModel(get(), get()) }
 //        viewModel { WelcomeViewModel() }
     }
 }

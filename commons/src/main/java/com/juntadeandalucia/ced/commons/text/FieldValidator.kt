@@ -7,7 +7,7 @@ import java.util.regex.Pattern
 class FieldValidator {
 
     fun validateAliasLogin(alias: String) = alias.isNotBlank() && !alias.contains("*")
-    fun validatePasswordLogin(password: String) = password.isNotBlank()
+    fun validatePasswordLogin(password: String) = password.isNotBlank() && !password.contains("*")
 
     fun validateEmail(email: String): Boolean {
         val expression =

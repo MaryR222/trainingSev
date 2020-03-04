@@ -3,8 +3,12 @@ package com.juntadeandalucia.ced.data.di
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.juntadeandalucia.ced.data.BuildConfig
 import com.juntadeandalucia.ced.data.InterceptorConnection
+import com.juntadeandalucia.ced.data.login.LoginRemoteDataSource
+import com.juntadeandalucia.ced.data.login.LoginRepositoryImpl
+import com.juntadeandalucia.ced.data.login.LoginService
 import com.juntadeandalucia.ced.data.remote.RemoteDataSourceExecutor
 import com.juntadeandalucia.ced.data.remote.ResponseParse
+import com.juntadeandalucia.ced.domain.login.LoginRepository
 import okhttp3.CertificatePinner
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -25,11 +29,11 @@ class DataKoinConfiguration(private val baseUrl: String) {
     fun getModule() = module {
 
         //Repository
-//        single<LoginRepository> { LoginRepositoryImpl(get(), get()) }
+        single<LoginRepository> { LoginRepositoryImpl(get(), get()) }
 
         // Remote data sources
         single { RemoteDataSourceExecutor(get()) }
-//        single { LoginRemoteDataSource(get(), get()) }
+        single { LoginRemoteDataSource(get(), get()) }
 
 
         // Retrofit
@@ -39,7 +43,7 @@ class DataKoinConfiguration(private val baseUrl: String) {
         single(named("retrofit")) { createRetrofit(get(named("juntaClient"))) }
 
         //All called of retrofit
-//        single { createRetrofitImplementation<LoginService>(get(named("retrofit"))) }
+        single { createRetrofitImplementation<LoginService>(get(named("retrofit"))) }
 
         // Response parsers
         single { ResponseParse(get()) }
